@@ -17,8 +17,6 @@ import java.util.ArrayList;
 public class RMIServer implements ServerInterface {
 
   private ConnectionPool pool;
-  private PropertyChangeListener broadcastListener;
-  private PropertyChangeListener userListListener;
 
   public RMIServer(ConnectionPool pool) throws RemoteException {
     UnicastRemoteObject.exportObject(this, 0);
@@ -32,18 +30,20 @@ public class RMIServer implements ServerInterface {
 
   @Override
   public void registerClient(ClientInterface client, String username) {
-    broadcastListener = (event) -> {
+    PropertyChangeListener broadcastListener = (event) -> {
       try {
         client.broadcast((Message) event.getNewValue());
-      } catch (RemoteException e) {
+      }
+      catch (RemoteException e) {
         e.printStackTrace();
       }
     };
 
-    userListListener = (event) -> {
+    PropertyChangeListener userListListener = (event) -> {
       try {
         client.userList((ArrayList<String>) event.getNewValue());
-      } catch (RemoteException e) {
+      }
+      catch (RemoteException e) {
         e.printStackTrace();
       }
     };
@@ -55,12 +55,6 @@ public class RMIServer implements ServerInterface {
   @Override
   public void login(String username) {
     pool.addUser(username);
-    System.out.println("username server: "+username);
-  }
-
-  @Override
-  public void disconnect(String username) {
-    pool.removeUser(username);
   }
 
   @Override
@@ -69,7 +63,12 @@ public class RMIServer implements ServerInterface {
   }
 
   @Override
-  public void getUserList(String username) {
+  public void getUserList(String username){
     pool.updateUserList(username);
+  }
+
+  @Override
+  public void disconnect(String username) {
+    pool.removeUser(username);
   }
 }

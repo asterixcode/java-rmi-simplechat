@@ -31,12 +31,6 @@ public class ChatViewModel implements Subject {
     support = new PropertyChangeSupport(this);
   }
 
-  private void setUsername(PropertyChangeEvent event) {
-    String name = (String) event.getNewValue();
-    System.out.println("username chatVM: "+name);
-    username.setValue(chatModel.getUsername());
-  }
-
   public void createUserList(PropertyChangeEvent event){
     ArrayList<String> users = (ArrayList<String>) event.getNewValue();
     support.firePropertyChange(UserAction.USER_LIST.toString(), null, users);
@@ -44,13 +38,11 @@ public class ChatViewModel implements Subject {
 
   private void onReceiveMessage(PropertyChangeEvent event) {
     Message message = (Message) event.getNewValue();
-    System.out.println("user in chatVM: "+message.getUsername());
     support.firePropertyChange(UserAction.BROADCAST.toString(), null, message);
   }
 
   public void sendMessageToServer() {
     Message message = new Message(send.getValue(), getUsername());
-    System.out.println("creating message in the viewModel" +username.getValue());
     chatModel.sendMessage(message);
   }
 
@@ -59,20 +51,8 @@ public class ChatViewModel implements Subject {
     chatModel.getUserList();
   }
 
-  @Override public void addListener(String eventName, PropertyChangeListener listener) {
-    support.addPropertyChangeListener(eventName, listener);
-  }
-
-  @Override public void removeListener(String eventName, PropertyChangeListener listener) {
-    support.removePropertyChangeListener(eventName, listener);
-  }
-
   public StringProperty getSendProperty() {
     return send;
-  }
-
-  public StringProperty getUsernameProperty() {
-    return username;
   }
 
   public void disconnect() {
@@ -81,5 +61,13 @@ public class ChatViewModel implements Subject {
 
   public String getUsername() {
     return chatModel.getUsername();
+  }
+
+  @Override public void addListener(String eventName, PropertyChangeListener listener) {
+    support.addPropertyChangeListener(eventName, listener);
+  }
+
+  @Override public void removeListener(String eventName, PropertyChangeListener listener) {
+    support.removePropertyChangeListener(eventName, listener);
   }
 }

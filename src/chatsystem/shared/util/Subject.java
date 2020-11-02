@@ -6,5 +6,4 @@ public interface Subject
 {
   void addListener(String eventName, PropertyChangeListener listener);
   void removeListener(String eventName, PropertyChangeListener listener);
-
 }

@@ -38,5 +38,4 @@ public class LoginViewController implements ViewController
     vh.openChat();
   }
 
-
 }

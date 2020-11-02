@@ -2,8 +2,7 @@ package chatsystem.shared.transferobjects;
 
 import java.io.Serializable;
 
-public class Message implements Serializable
-{
+public class Message implements Serializable {
   private String messageBody;
   private String username;
 

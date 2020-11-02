@@ -4,7 +4,6 @@ import chatsystem.client.core.ViewHandler;
 import chatsystem.client.core.ViewModelFactory;
 import chatsystem.client.views.ViewController;
 import javafx.application.Platform;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -55,11 +54,8 @@ public class ChatViewController implements ViewController
     sendTextField.clear();
   }
 
-
-
   private void onReceiveMessage(PropertyChangeEvent event) {
     Message message = (Message) event.getNewValue();
-    System.out.println("Message received back in the controller");
     Platform.runLater(() -> {
       receiveTextVBox.getChildren().add(createMessage(message));
     });

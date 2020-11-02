@@ -9,7 +9,7 @@ public interface ServerInterface extends Remote
 {
   void registerClient(ClientInterface client, String username) throws RemoteException;
   void login(String username) throws RemoteException;
-  void disconnect(String username) throws RemoteException;
   void broadcast(Message message) throws RemoteException;
   void getUserList(String username) throws RemoteException;
+  void disconnect(String username) throws RemoteException;
 }

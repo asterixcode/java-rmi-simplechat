@@ -18,8 +18,7 @@ public class RMIClient implements Client, ClientInterface {
   private ServerInterface server;
   private PropertyChangeSupport support;
 
-  public RMIClient()
-  {
+  public RMIClient() {
     support = new PropertyChangeSupport(this);
   }
 
@@ -40,7 +39,6 @@ public class RMIClient implements Client, ClientInterface {
     try {
       server.registerClient(this, username);
       server.login(username);
-      System.out.println("username in the rmiclient: " + username);
     } catch (RemoteException e) {
       throw new RuntimeException("Could not contact server");
     }
@@ -50,7 +48,6 @@ public class RMIClient implements Client, ClientInterface {
   public void sendMessage(Message message) {
     try {
       server.broadcast(message);
-      System.out.println("sending message in the RMIClient to the server: " + message);
     } catch (RemoteException e) {
       throw new RuntimeException("Could not contact server");
     }
@@ -77,7 +74,6 @@ public class RMIClient implements Client, ClientInterface {
   @Override
   public void broadcast(Message message) {
     support.firePropertyChange(UserAction.BROADCAST.toString(), null, message);
-    System.out.println("user in RMI client: "+message.getUsername());
   }
 
   @Override

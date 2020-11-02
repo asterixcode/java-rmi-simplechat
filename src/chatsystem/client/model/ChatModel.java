@@ -3,7 +3,6 @@ package chatsystem.client.model;
 import chatsystem.shared.transferobjects.Message;
 import chatsystem.shared.util.Subject;
 import javafx.beans.property.Property;
-import javafx.beans.property.StringProperty;
 
 public interface ChatModel extends Subject {
   void createUsername(String username);
@@ -12,6 +11,5 @@ public interface ChatModel extends Subject {
   void disconnect();
   String getUsername();
   void setUsername(String username);
-
   Property<String> getUsernameProperty();
 }
