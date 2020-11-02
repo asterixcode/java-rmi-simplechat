@@ -31,8 +31,7 @@ public class ChatViewController implements ViewController
   public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
     chatViewModel = vmf.getChatViewModel();
-
-    usernameLabel.textProperty().bind(chatViewModel.getUsernameProperty());
+    
     sendTextField.textProperty().bindBidirectional(chatViewModel.getSendProperty());
 
     chatViewModel.addListener(UserAction.BROADCAST.toString(), this::onReceiveMessage);
@@ -47,6 +46,8 @@ public class ChatViewController implements ViewController
       }
     });
     chatViewModel.getUserList();
+
+    usernameLabel.setText(chatViewModel.getUsername());
   }
 
   public void onSendMessage() {

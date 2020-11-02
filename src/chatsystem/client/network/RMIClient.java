@@ -77,7 +77,7 @@ public class RMIClient implements Client, ClientInterface {
   @Override
   public void broadcast(Message message) {
     support.firePropertyChange(UserAction.BROADCAST.toString(), null, message);
-    System.out.println("message fired up in the RMIClient");
+    System.out.println("user in RMI client: "+message.getUsername());
   }
 
   @Override

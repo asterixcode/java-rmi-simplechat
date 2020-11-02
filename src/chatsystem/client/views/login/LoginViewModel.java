@@ -15,6 +15,7 @@ public class LoginViewModel
   }
 
   public void login() {
+    System.out.println("username loginVM: "+ username.getValue());
     chatModel.setUsername(username.getValue());
     chatModel.createUsername(username.getValue());
   }

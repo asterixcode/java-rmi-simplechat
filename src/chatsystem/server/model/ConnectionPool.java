@@ -19,6 +19,7 @@ public class ConnectionPool implements Subject
 
   public void addUser(String username) {
     userList.add(username);
+    System.out.println("username server model: "+username);
     getUsersList();
   }
 

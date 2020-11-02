@@ -3,6 +3,7 @@ package chatsystem.client.model;
 import chatsystem.client.network.Client;
 import chatsystem.shared.transferobjects.Message;
 import chatsystem.shared.util.UserAction;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.beans.PropertyChangeEvent;
@@ -32,6 +33,7 @@ public class ChatModelManager implements ChatModel {
   @Override
   public void createUsername(String username) {
     client.login(username);
+    System.out.println("username chatModelManager: "+ username);
   }
 
 
@@ -53,14 +55,18 @@ public class ChatModelManager implements ChatModel {
   }
 
   @Override
-  public StringProperty getUsername() {
-    return username;
+  public String getUsername() {
+    return username.getValue();
   }
 
   @Override
   public void setUsername(String username) {
     this.username.setValue(username);
-    support.firePropertyChange(UserAction.USERNAME.toString(), null, username);
+  }
+
+  @Override
+  public StringProperty getUsernameProperty() {
+    return username;
   }
 
   @Override

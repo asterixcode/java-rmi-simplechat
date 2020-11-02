@@ -21,10 +21,10 @@ public class ChatViewModel implements Subject {
     this.chatModel = chatModel;
 
     send = new SimpleStringProperty();
-
     username = new SimpleStringProperty();
 
-    chatModel.addListener(UserAction.USERNAME.toString(), this::setUsername);
+    username.bindBidirectional(chatModel.getUsernameProperty());
+
     chatModel.addListener(UserAction.BROADCAST.toString(), this::onReceiveMessage);
     chatModel.addListener(UserAction.USER_LIST.toString(), this::createUserList);
 
@@ -33,23 +33,24 @@ public class ChatViewModel implements Subject {
 
   private void setUsername(PropertyChangeEvent event) {
     String name = (String) event.getNewValue();
-    username.setValue(name);
+    System.out.println("username chatVM: "+name);
+    username.setValue(chatModel.getUsername());
   }
 
   public void createUserList(PropertyChangeEvent event){
     ArrayList<String> users = (ArrayList<String>) event.getNewValue();
-//    users.remove(username.getValue());
     support.firePropertyChange(UserAction.USER_LIST.toString(), null, users);
   }
 
   private void onReceiveMessage(PropertyChangeEvent event) {
     Message message = (Message) event.getNewValue();
+    System.out.println("user in chatVM: "+message.getUsername());
     support.firePropertyChange(UserAction.BROADCAST.toString(), null, message);
   }
 
   public void sendMessageToServer() {
-    Message message = new Message(send.getValue(), username.getValue());
-    System.out.println(username.getValue());
+    Message message = new Message(send.getValue(), getUsername());
+    System.out.println("creating message in the viewModel" +username.getValue());
     chatModel.sendMessage(message);
   }
 
@@ -76,5 +77,9 @@ public class ChatViewModel implements Subject {
 
   public void disconnect() {
     chatModel.disconnect();
+  }
+
+  public String getUsername() {
+    return chatModel.getUsername();
   }
 }

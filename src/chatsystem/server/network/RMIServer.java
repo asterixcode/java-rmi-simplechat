@@ -55,6 +55,7 @@ public class RMIServer implements ServerInterface {
   @Override
   public void login(String username) {
     pool.addUser(username);
+    System.out.println("username server: "+username);
   }
 
   @Override
