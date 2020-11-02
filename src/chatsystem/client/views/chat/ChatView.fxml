@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="457.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatsystem.client.views.chat.ChatViewController">
+   <children>
+      <TextField fx:id="sendTextField" layoutX="13.0" layoutY="358.0" prefHeight="27.0" prefWidth="272.0" promptText="type here..." />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="289.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="27.0" prefWidth="87.0" text="Send" textAlignment="CENTER" />
+      <Text layoutX="20.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHAT" />
+      <Text layoutX="398.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ONLINE USERS" wrappingWidth="163.18017578125" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="13.0" layoutY="45.0" prefHeight="305.0" prefWidth="363.0" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="receiveTextVBox" prefHeight="298.0" prefWidth="358.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane hbarPolicy="NEVER" layoutX="397.0" layoutY="45.0" prefHeight="305.0" prefWidth="179.0" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="userListVBox" prefHeight="304.0" prefWidth="177.0" />
+         </content>
+      </ScrollPane>
+      <Label fx:id="usernameLabel" layoutX="91.0" layoutY="405.0" prefHeight="27.0" prefWidth="209.0" textAlignment="CENTER" />
+      <Text layoutX="20.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="71.2060546875" />
+      <Button cancelButton="true" layoutX="289.0" layoutY="405.0" mnemonicParsing="false" onAction="#onDisconnect" text="Disconnect" />
+   </children>
+</AnchorPane>
